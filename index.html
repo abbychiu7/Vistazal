@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vistazal — A Digital Journey Through Rizal's Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════
+       LOADING SCREEN
+  ══════════════════════════════════════════ -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-ornament">✦</div>
+      <h2 class="loader-headline">Decolonizing your brain<span class="loader-ellipsis">...</span></h2>
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill" id="loaderBar"></div>
+      </div>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+      <p class="loader-sub">Preparing nine vistas · Please wait</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-v">V</span>ISTAZAL
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#timeline">The Vistas</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#archive" class="nav-cta">Archive</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+      <li><a href="#timeline" class="mobile-nav-link">The Vistas</a></li>
+      <li><a href="#games" class="mobile-nav-link">Games</a></li>
+      <li><a href="#archive" class="mobile-nav-link">Archive</a></li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════ -->
+  <section id="hero">
+    <video autoplay muted loop playsinline class="hero-video-bg">
+      <source src="hero-vi.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-bg-texture"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-title reveal-up">
+        Welcome to<br />
+        The Life &amp; Vistas <span class="title-of">of</span><br />
+        <span class="title-name">José Rizal</span>
+      </h1>
+      <div class="hero-actions reveal-up" style="--delay: 0.35s">
+        <a href="#timeline" class="btn-primary btn-hero">Begin the Journey</a>
+      </div>
+    </div>
+  </section>
+  <!-- ══════════════════════════════════════════
+       ARCHIVE / FOOTER CTA
+  ══════════════════════════════════════════ -->
+  <section id="archive" class="observe-fade">
+    <div class="archive-inner">
+      <p class="section-eyebrow">— The Digital Archive —</p>
+      <h2 class="archive-title">Every Word<br /><em>He Wrote</em></h2>
+      <p class="archive-desc">
+        All of Rizal's published works are in the public domain and free to read.
+        No permission required. Just a curious mind, waiting.
+        <!-- </p>
+      <a href="https://www.gutenberg.org/ebooks/author/5342" target="_blank" rel="noopener" class="btn-primary large">
+        Visit the Gutenberg Archive →
+      </a>
+      <div class="archive-ornament">✦ ─────────────────── ✦</div>
+    </div> -->
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TIMELINE / VISTAS
+  ══════════════════════════════════════════ -->
+  <section id="timeline">
+    <div class="timeline-header observe-fade">
+      <p class="section-eyebrow">— The Nine Vistas —</p>
+      <h2 class="section-title">A Life in <em>Scenes</em></h2>
+      <p class="section-desc">Each vista is a window. Open the sealed envelope to read further.</p>
+    </div>
+
+    <!-- The golden timeline spine -->
+    <div class="timeline-spine"></div>
+
+    <!-- ── Vista 01 ── -->
+    <article class="vista observe-fade" id="vista-1">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">01</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-1">
+            <div class="image-overlay-text">
+              <span>1800s</span>
+              <span>Philippine Colony</span>
+            </div>
+          </div>
+          <div class="vista-tag">19th Century</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1800s · The Colony</p>
+        <h3 class="vista-title">19th Century Context</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          A land owned by crosses, swords, and silence — where a name could be taken from you overnight.
+        </p>
+        <button class="wax-seal-btn" data-link="https://www.britannica.com/place/Philippines/The-19th-century"
+          data-title="19th Century Philippines"
+          data-desc="Spain's three-century colonial grip on the Philippines created a rigid racial caste system enforced by the Church and Guardia Civil. Into this world, on June 19, 1861, José Protasio Rizal Mercado y Alonso Realonda was born in Calamba, Laguna."
+          data-gutenberg="https://www.britannica.com/place/Philippines/The-19th-century"
+          data-video="19thcentury.mp4">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 02 ── -->
+    <article class="vista vista-flip observe-fade" id="vista-2">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">02</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-2">
+            <div class="image-overlay-text">
+              <span>1850s</span>
+              <span>The Ilustrado</span>
+            </div>
+          </div>
+          <div class="vista-tag">Society</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1850s · The Ilustrado Class</p>
+        <h3 class="vista-title">Rise of the Middle Class</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          Wealth cracked the walls of the hacienda, and suddenly a Filipino could afford to think.
+        </p>
+        <button class="wax-seal-btn" data-link="https://sinaunangpanahon.com/the-rise-of-filipino-intellectuals-and-scholars-in-the-spanish-era/"
+          data-title="Rise of the Middle Class"
+          data-desc="The ilustrado class — educated, mestizo, and commercially prosperous — emerged as colonial trade expanded. Rizal's own family were principalia landowners in Calamba, giving young José access to books, tutors, and eventually the world beyond the barangay."
+          data-gutenberg="https://sinaunangpanahon.com/the-rise-of-filipino-intellectuals-and-scholars-in-the-spanish-era/">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 03 ── -->
+    <article class="vista observe-fade" id="vista-3">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">03</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-3">
+            <div class="image-overlay-text">
+              <span>1870s</span>
+              <span>Ateneo de Manila</span>
+            </div>
+          </div>
+          <div class="vista-tag">Education</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1870s · Education</p>
+        <h3 class="vista-title">Student Life</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          He collected medals the way others collected grievances — with quiet, burning intention.
+        </p>
+        <button class="wax-seal-btn"
+          data-link="https://archium.ateneo.edu/cgi/viewcontent.cgi?article=1762&context=phstudies"
+          data-title="Student Life"
+          data-desc="At Ateneo Municipal de Manila, Rizal won top honors in nearly every subject — from poetry to philosophy to science. He observed, sharply, how education was rationed by race. Later at UST, he witnessed discrimination firsthand, pushing him toward Europe."
+          data-gutenberg="https://archium.ateneo.edu/cgi/viewcontent.cgi?article=1762&context=phstudies">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 04 ── -->
+    <article class="vista vista-flip observe-fade" id="vista-4">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">04</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-4">
+            <div class="image-overlay-text">
+              <span>1882–1892</span>
+              <span>Madrid · Berlin · London</span>
+            </div>
+          </div>
+          <div class="vista-tag">Secret Mission</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1882–1892 · Europe</p>
+        <h3 class="vista-title">Rizal in Europe</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          He left to become a doctor; he returned a mirror the colony could not break.
+        </p>
+        <button class="wax-seal-btn" data-link="https://rizal.raphaelmarco.com/travels" data-title="Rizal in Europe"
+          data-desc="In Madrid, Paris, Heidelberg, and London, Rizal studied medicine, ophthalmology, and the humanities. He mixed with reformists, read voraciously, and sharpened his pen into a weapon. His letters home became contraband; his ideas became revolution."
+          data-gutenberg="https://rizal.raphaelmarco.com/travels">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 05 ── -->
+    <article class="vista observe-fade" id="vista-5">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">05</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-5">
+            <div class="image-overlay-text">
+              <span>1890</span>
+              <span>Correcting Spanish misconceptions</span>
+            </div>
+          </div>
+          <div class="vista-tag">Research</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1890 · London</p>
+        <h3 class="vista-title">Annotations to Morga</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          He annotated a Spanish history book in the margins to prove that civilization was here long before Spain.
+        </p>
+        <button class="wax-seal-btn"
+          data-link="https://sirmykel.wordpress.com/wp-content/uploads/2016/07/jose-rizal-annotations-to-morgas-sucesos.pdf"
+          data-title="Sucesos de las Islas Filipinas — Annotated"
+          data-desc="Working in the British Museum, Rizal annotated Antonio de Morga's 1609 chronicle of the Philippines to reclaim precolonial Filipino dignity. His margin notes are an act of historiographical revolution — proving a people existed fully before conquest."
+          data-gutenberg="https://sirmykel.wordpress.com/wp-content/uploads/2016/07/jose-rizal-annotations-to-morgas-sucesos.pdf">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 06 ── -->
+    <article class="vista vista-flip observe-fade" id="vista-6">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">06</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-6">
+            <div class="image-overlay-text">
+              <span>1887 &amp; 1891</span>
+              <span>Noli · El Fili</span>
+            </div>
+          </div>
+          <div class="vista-tag">Novel</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1887 · 1891 · The Novels</p>
+        <h3 class="vista-title">Noli Me Tángere &amp; El Filibusterismo</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          Two books so dangerous the colony banned them — which only made every Filipino hunger to read them.
+        </p>
+        <button class="wax-seal-btn" data-link="https://www.gutenberg.org/ebooks/6737"
+          data-title="Noli Me Tángere & El Filibusterismo"
+          data-desc="Touch Me Not (1887) and The Subversive (1891) named the hypocrisy of Church and colonial State with ferocious precision. Spain banned them. The Katipunan used them as revolutionary texts."
+          data-gutenberg="https://www.gutenberg.org/ebooks/6737">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 07 ── -->
+    <article class="vista observe-fade" id="vista-7">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">07</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-7">
+            <div class="image-overlay-text">
+              <span>1887 &amp; 1892</span>
+              <span>Return to Calamba</span>
+            </div>
+          </div>
+          <div class="vista-tag">Return</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1887 &amp; 1892 · The Philippines</p>
+        <h3 class="vista-title">Homecomings</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          Every time he came home, the archipelago felt both freer and more dangerous for having him back.
+        </p>
+        <button class="wax-seal-btn" data-link="https://www.gutenberg.org/ebooks/6737" data-title="Homecomings"
+          data-desc="Rizal's returns to the Philippines were tense affairs — celebrated by reformists and patriots, yet monitored closely by friars and the Guardia Civil. On his second homecoming in 1892, he was arrested and exiled to Dapitan within weeks of arriving."
+          data-gutenberg="https://www.gutenberg.org/ebooks/6737">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 08 ── -->
+    <article class="vista vista-flip observe-fade" id="vista-8">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">08</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-8">
+            <div class="image-overlay-text">
+              <span>1892–1896</span>
+              <span>Dapitan · Mindanao</span>
+            </div>
+          </div>
+          <div class="vista-tag">Exile</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1892–1896 · Mindanao</p>
+        <h3 class="vista-title">Exile in Dapitan</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          Spain sent him to the edge of the map; he built a school, a hospital, and a water system there anyway.
+        </p>
+        <button class="wax-seal-btn" data-link="https://www.gutenberg.org/ebooks/6737" data-title="Exile in Dapitan"
+          data-desc="Four years of exile in Dapitan, Mindanao became Rizal's laboratory of nation-building. He practiced medicine for the poor, built infrastructure from memory and local materials, taught children, sculpted, painted, and fell in love with Josephine Bracken."
+          data-gutenberg="https://www.gutenberg.org/ebooks/6737">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- ── Vista 09 ── -->
+    <article class="vista observe-fade" id="vista-9">
+      <div class="vista-connector">
+        <div class="connector-dot"></div>
+        <div class="connector-num">09</div>
+      </div>
+      <div class="vista-image-col">
+        <div class="vista-image-wrap">
+          <div class="vista-image vi-9">
+            <div class="image-overlay-text">
+              <span>1896</span>
+              <span>Mi Último Adiós</span>
+            </div>
+          </div>
+          <div class="vista-tag">Legacy</div>
+        </div>
+      </div>
+      <div class="vista-content-col">
+        <p class="vista-era">1896 · Bagumbayan</p>
+        <h3 class="vista-title">"Education Gives Luster<br />to the Motherland"</h3>
+        <div class="vista-divider"></div>
+        <p class="vista-line">
+          He wrote his final poem the night before they shot him, folded it into a small oil lamp, and hid it in his
+          shoe.
+        </p>
+        <button class="wax-seal-btn" data-link="https://www.gutenberg.org/ebooks/6737"
+          data-title="Mi Último Adiós — My Last Farewell"
+          data-desc="Written in secret the night before his execution at Bagumbayan on December 30, 1896, 'Mi Último Adiós' is one of the most moving poems in Philippine history. It was not given a title by Rizal himself — the title was added by his friends after his death."
+          data-gutenberg="https://www.gutenberg.org/ebooks/6737">
+          <span class="seal-wax">🔴</span>
+          <span class="seal-label">Open the Archive</span>
+          <span class="seal-arrow">→</span>
+        </button>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GAMES SECTION
+  ══════════════════════════════════════════ -->
+  <section id="games">
+    <div class="dapitan-header observe-fade">
+      <p class="section-eyebrow">— Interactive —</p>
+      <h2 class="section-title">Test Your <em>Knowledge</em></h2>
+      <p class="section-desc">
+        Four games. One Hero. How well do you really know the man behind the martyrdom?
+      </p>
+    </div>
+
+    <div class="games-preview observe-fade">
+
+      <div class="game-preview-card">
+        <div class="gpc-icon">🏛️</div>
+        <div class="gpc-num">01</div>
+        <h3 class="gpc-title">Trivia Quiz</h3>
+        <p class="gpc-desc">10 questions. Mixed difficulty. A historical fact appears after every answer — right or
+          wrong.</p>
+        <div class="gpc-tag">10 Questions</div>
+      </div>
+
+      <div class="game-preview-card">
+        <div class="gpc-icon">🔗</div>
+        <div class="gpc-num">02</div>
+        <h3 class="gpc-title">Match the Pairs</h3>
+        <p class="gpc-desc">Connect Rizal's works and events to their correct descriptions before the mistakes add up.
+        </p>
+        <div class="gpc-tag">8 Pairs</div>
+      </div>
+
+      <div class="game-preview-card">
+        <div class="gpc-icon">✍️</div>
+        <div class="gpc-num">03</div>
+        <h3 class="gpc-title">Fill in the Blanks</h3>
+        <p class="gpc-desc">Eight sentences about Rizal's life with missing words. Pick from the word bank to complete
+          each one.</p>
+        <div class="gpc-tag">8 Sentences</div>
+      </div>
+
+      <div class="game-preview-card">
+        <div class="gpc-icon">📜</div>
+        <div class="gpc-num">04</div>
+        <h3 class="gpc-title">Timeline Order</h3>
+        <p class="gpc-desc">Drag and drop 10 events from Rizal's life into the correct chronological order.</p>
+        <div class="gpc-tag">10 Events</div>
+      </div>
+
+    </div>
+
+    <div class="games-cta observe-fade">
+      <a href="games.html" class="btn-primary large">Enter the Games Room →</a>
+      <p class="games-cta-note">Opens in the same tab · No account needed · Completely free</p>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">VISTAZAL</div>
+      <p class="footer-tagline">A visual archive for the curious generation.</p>
+      <div class="footer-divider">✦</div>
+      <p class="footer-credit">
+        Texts sourced from <a href="https://www.gutenberg.org" target="_blank" rel="noopener"></a>.
+        Built with Heritage Minimalism. In memory of José Rizal · 1861–1896.
+      </p>
+      <p class="footer-disclaimer">This is an educational project. All historical content is in the public domain.</p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       MODAL — WAX SEAL ARCHIVE
+  ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+      <div class="modal-seal">
+        <span class="modal-seal-icon">🔴</span>
+      </div>
+      <p class="modal-eyebrow">The Archive ·</p>
+      <h3 class="modal-title" id="modalTitle">Title</h3>
+      <div class="modal-divider"></div>
+      <p class="modal-desc" id="modalDesc">Description goes here.</p>
+      <a href="#" class="modal-link" id="modalLink" target="_blank" rel="noopener">
+        <span>Read on External Site</span>
+        <span class="link-arrow">↗</span>
+      </a>
+      <a href="#" class="modal-video-link" id="modalVideoLink" target="_blank" rel="noopener" style="display:none;">
+        <span class="modal-video-icon"></span>
+        <span>Watch AI Video on External Site</span>
+        <span class="link-arrow">↗</span>
+      </a>
+      <!-- Inline video player (hidden until toggled) -->
+      <div class="modal-video-wrap" id="modalVideoWrap" style="display:none;">
+        <video id="modalVideo" controls playsinline>
+          <source id="modalVideoSrc" src="" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p class="modal-video-credit">Generated with NotebookLM · AI-powered overview</p>
+      </div>
+      <p class="modal-footnote">Free to read · Public domain · No account required</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
