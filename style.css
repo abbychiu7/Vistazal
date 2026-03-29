@@ -544,25 +544,41 @@ button {
   font-size: 0.8rem;
 }
 
+.btn-games {
+  background: var(--navy) !important;
+  color: var(--parchment) !important;
+  border: 2px solid var(--navy) !important;
+}
+
+.btn-games:hover {
+  background: var(--navy-dark) !important;
+  border-color: var(--navy-dark) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 32, 112, 0.4);
+}
+
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 13px 28px;
-  border: 1px solid var(--parchment-3);
-  color: var(--ink-soft);
+  border: 1px solid var(--gold);
+  color: var(--gold);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   border-radius: 2px;
+  background: transparent;
   transition: border-color 0.3s, color 0.3s, background 0.3s;
 }
 
 .btn-ghost:hover {
   border-color: var(--gold);
   color: var(--gold);
-  background: var(--gold-pale);
+  background: rgba(212, 160, 23, 0.15); /* light gold tint */
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(181, 133, 22, 0.25);
 }
 
 .hero-meta {
@@ -1005,15 +1021,27 @@ button {
 }
 
 .vi-7 {
-  background: linear-gradient(145deg, #200d0d 0%, #4a1515 55%, #8b2020 100%);
+  background-image: url('vista-07.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #200d0d;
 }
 
 .vi-8 {
-  background: linear-gradient(145deg, #0d1f10 0%, #0d3d1c 55%, #1a6b35 100%);
+  background-image: url('vista-08.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0d1f10;
 }
 
 .vi-9 {
-  background: linear-gradient(145deg, #1a1005 0%, #B8860B 55%, #d4a020 100%);
+  background-image: url('vista-09.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1a1005;
 }
 
 .image-overlay-text {
@@ -1399,13 +1427,14 @@ button {
   border-bottom: 1px solid var(--parchment-3);
 }
 
-/* ── 4-card preview grid ── */
+/* ── 2-card preview grid ── */
 .games-preview {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  max-width: 1100px;
+  max-width: 700px;
   margin: 0 auto 56px;
+  justify-content: center;
 }
 
 .game-preview-card {

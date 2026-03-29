@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vistazal Games — Test Your Knowledge of Rizal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Override navbar for games page */
+    #navbar {
+      background: linear-gradient(135deg, #0038A8 0%, #002070 100%);
+      box-shadow: 0 4px 12px rgba(0, 56, 168, 0.3);
+    }
+
+    #navbar .nav-logo {
+      color: white !important;
+    }
+
+    #navbar .nav-logo-v {
+      color: var(--gold-light);
+    }
+
+    #navbar .nav-links a {
+      color: white !important;
+      transition: all 0.3s ease;
+    }
+
+    #navbar .nav-links a:hover {
+      color: var(--gold-light) !important;
+    }
+
+    #navbar .nav-cta {
+      border-color: var(--gold-light) !important;
+      color: var(--gold-light) !important;
+    }
+
+    #navbar .nav-hamburger span {
+      background: white;
+    }
+
+    .back-to-games-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 6px 12px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.8rem;
+      grid-column: 2;
+      grid-row: 3;
+      justify-self: end;
+    }
+
+    .back-to-games-btn:hover {
+      background: var(--navy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 56, 168, 0.3);
+    }
+
+    .games-container {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .games-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .games-bg-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 85%, rgba(184, 134, 11, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(0, 56, 168, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .games-wrapper {
+      max-width: 900px;
+      margin: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 3;
+    }
+
+    .games-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .games-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .games-header p {
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Game Menu */
+    .game-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+
+    .game-btn {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(181, 133, 22, 0.2);
+    }
+
+    .game-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(181, 133, 22, 0.3);
+    }
+
+    .game-btn span {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .game-label {
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    /* Game Screen */
+    .game-screen {
+      display: none;
+    }
+
+    .game-screen.active {
+      display: block;
+    }
+
+    .game-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--parchment-3);
+    }
+
+    .game-header h2 {
+      font-size: 1.8rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .game-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--parchment-3);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transition: width 0.3s ease;
+    }
+
+    /* Question Content */
+    .question-container {
+      margin-bottom: 30px;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .answer-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      padding: 14px 16px;
+      background: var(--parchment);
+      border: 2px solid var(--parchment-3);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .option-btn:hover {
+      background: var(--parchment-2);
+      border-color: var(--gold);
+    }
+
+    .option-btn.selected {
+      background: var(--gold-pale);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .option-btn.correct {
+      background: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    .option-btn.incorrect {
+      background: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+    }
+
+    /* Input fields */
+    .answer-input {
+      padding: 14px 16px;
+      border: 2px solid var(--parchment-3);
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .answer-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: var(--gold-pale);
+    }
+
+    /* Historical Fact */
+    .historical-fact {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(212, 160, 23, 0.1));
+      border-left: 4px solid var(--gold);
+      padding: 16px;
+      border-radius: 4px;
+      margin-top: 16px;
+      display: none;
+    }
+
+    .historical-fact.show {
+      display: block;
+    }
+
+    .historical-fact-label {
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .historical-fact-text {
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+      justify-content: flex-end;
+    }
+
+    .btn-back {
+      padding: 12px 24px;
+      background: var(--parchment-3);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--ink);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: var(--parchment-2);
+    }
+
+    .btn-next {
+      padding: 12px 24px;
+      background: var(--navy);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: var(--navy-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-next:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Score Summary */
+    .score-summary {
+      background: linear-gradient(135deg, rgba(0, 56, 168, 0.05), rgba(212, 160, 23, 0.05));
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .score-summary.show {
+      display: block;
+    }
+
+    .final-score {
+      font-size: 3rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin: 16px 0;
+    }
+
+    .score-message {
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .games-wrapper {
+        padding: 24px;
+      }
+
+      .games-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .game-menu {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn-back,
+      .btn-next {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-v">V</span>ISTAZAL
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#timeline">The Vistas</a></li>
+      <li><a href="index.html#games" class="nav-cta">Games</a></li>
+      <li><a href="index.html#archive">Archive</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="games-container">
+    <video autoplay muted loop playsinline class="games-video-bg">
+      <source src="hero-vi.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="games-bg-texture"></div>
+    <div class="games-wrapper">
+      <!-- Game Menu -->
+      <div id="gameMenu" class="game-menu active-state">
+        <div class="games-header" style="grid-column: 1 / -1;">
+          <h1>Test Your Knowledge</h1>
+          <p>Choose a game to test how well you know the life and works of José Rizal</p>
+        </div>
+        <button class="game-btn" onclick="startGame('trivia')">
+          <span>🎓</span>
+          <span class="game-label">Trivia Quiz</span>
+          <small>(10 Questions)</small>
+        </button>
+        <button class="game-btn" onclick="startGame('blanks')">
+         
+          <span class="game-label">Fill in the Blanks</span>
+          <small>(8 Sentences)</small>
+        </button>
+        <a href="index.html#games" class="back-to-games-btn">← Back to Vistazal</a>
+      </div>
+
+      <!-- Trivia Game Screen -->
+      <div id="triviaScreen" class="game-screen">
+        <div class="game-header">
+          <h2>Trivia Quiz</h2>
+          <div class="game-progress">
+            <span id="triviaProgress">Question 1 of 10</span>
+            <span id="triviaScore">Score: 0/10</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="triviaProgressBar" style="width: 10%"></div>
+          </div>
+        </div>
+        <div class="question-container">
+          <div class="question-text" id="triviaQuestion"></div>
+          <div class="answer-options" id="triviaOptions"></div>
+          <div class="historical-fact" id="historicalFact">
+            <div class="historical-fact-label">⭐ Historical Fact</div>
+            <div class="historical-fact-text" id="factText"></div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn-back" onclick="backToMenu()">Back to Menu</button>
+          <button class="btn-next" id="triviaNextBtn" onclick="nextTrivia()" disabled>Next →</button>
+        </div>
+        <div class="score-summary" id="triviaSummary">
+          <h3>Quiz Complete!</h3>
+          <div class="final-score" id="finalTriviaScore">0/10</div>
+          <p class="score-message" id="triviaMessage"></p>
+          <button class="btn-next" onclick="backToMenu()">Play Again →</button>
+        </div>
+      </div>
+
+      <!-- Fill in Blanks Screen -->
+      <div id="blanksScreen" class="game-screen">
+        <div class="game-header">
+          <h2>Fill in the Blanks</h2>
+          <div class="game-progress">
+            <span id="blanksProgress">Question 1 of 8</span>
+            <span id="blanksScore">Score: 0/8</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="blanksProgressBar" style="width: 12.5%"></div>
+          </div>
+        </div>
+        <div class="question-container">
+          <div class="question-text" id="blanksQuestion"></div>
+          <input type="text" class="answer-input" id="blanksInput" placeholder="Type your answer and press Enter or click Next">
+          <div class="historical-fact" id="blanksFact">
+            <div class="historical-fact-label">✓ Correct!</div>
+            <div class="historical-fact-text" id="blanksFactText"></div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn-back" onclick="backToMenu()">Back to Menu</button>
+          <button class="btn-next" id="blanksNextBtn" onclick="nextBlanks()">Next →</button>
+        </div>
+        <div class="score-summary" id="blanksSummary">
+          <h3>Quiz Complete!</h3>
+          <div class="final-score" id="finalBlanksScore">0/8</div>
+          <p class="score-message" id="blanksMessage"></p>
+          <button class="btn-next" onclick="backToMenu()">Play Again →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Game Data
+    const triviaData = [
+      {
+        question: "What was Rizal's first poem?",
+        options: ["Sa Aking Mga Kabata", "Mi Último Adiós", "Education Gives Luster to the Motherland", "Pepe Pluma"],
+        correct: 0,
+        fact: "Rizal wrote 'Sa Aking Mga Kabata' (To My Dear Countrymen) when he was just 8 years old, showcasing his early linguistic talents, as the poem was written in Tagalog."
+      },
+      {
+        question: "Where was Rizal born?",
+        options: ["Manila", "Calamba, Laguna", "Dapitan, Mindanao", "Cavite"],
+        correct: 1,
+        fact: "Calamba was the birthplace of Rizal on June 19, 1861. The town is located in the Laguna province, approximately 40km south of Manila."
+      },
+      {
+        question: "What does the title 'Noli Me Tangere' mean?",
+        options: ["Do Not Touch Me", "Touch Me Not", "The Social Cancer", "Cry of the Oppressed"],
+        correct: 1,
+        fact: "'Noli Me Tangere' comes from Latin and means 'Touch Me Not'. It was inspired by the biblical account of Mary Magdalene's encounter with the risen Jesus."
+      },
+      {
+        question: "Who was Rizal's first teacher?",
+        options: ["Hermano Pío", "Teodoro de Lete", "His mother, Teodora Alonso", "Maestro Justiniano"],
+        correct: 2,
+        fact: "Rizal's mother, Teodora Alonso, was his first teacher. She taught him to read and write, and instilled in him a love of learning and patriotism."
+      },
+      {
+        question: "What was the name of the ship that took Rizal to Spain in 1882?",
+        options: ["Salvadora", "Macedonia", "Oceania", "España"],
+        correct: 0,
+        fact: "The ship 'Salvadora' carried Rizal to Spain in 1882, marking the beginning of his self-imposed exile and his exposure to European liberal ideas."
+      },
+      {
+        question: "What was the name of Rizal's secret society?",
+        options: ["La Solidaridad", "La Liga Filipina", "Katipunan", "Propaganda Movement"],
+        correct: 1,
+        fact: "Rizal founded 'La Liga Filipina' in 1892 in the house of Doroteo Ongjunco in Tondo, Manila. It aimed to unite Filipinos for reform through peaceful means."
+      },
+      {
+        question: "In which city was Rizal executed?",
+        options: ["Cebu", "Manila / Bagumbayan", "Iloilo", "Davao"],
+        correct: 1,
+        fact: "Rizal was executed on December 30, 1896, at Bagumbayan (now Rizal Park) in Manila. His execution sparked the Philippine Revolution."
+      },
+      {
+        question: "How many languages could Rizal speak?",
+        options: ["10", "15", "22", "18"],
+        correct: 2,
+        fact: "Rizal was a polyglot who spoke at least 22 languages and dialects, including Tagalog, Spanish, English, French, German, Italian, Portuguese, Latin, Greek, and many others."
+      },
+      {
+        question: "What was the name of Rizal's Irish wife?",
+        options: ["Maria", "Josephine Bracken", "Rosa", "Florentiina"],
+        correct: 1,
+        fact: "Josephine Bracken was an Irish woman who Rizal met and fell in love with during his exile in Dapitan. They were together from 1895 until his execution in 1896."
+      },
+      {
+        question: "To whom did Rizal dedicate 'El Filibusterismo'?",
+        options: ["Philippine Revolution", "GOMBURZA", "The Filipino People", "King Philip II"],
+        correct: 1,
+        fact: "'El Filibusterismo' was dedicated to the GOMBURZA – Padre Mariano Gómez, Padre José María Burgos, and Padre Jacinto Zamora, three priests executed in 1872 for alleged subversion."
+      }
+    ];
+
+    const blanksData = [
+      { sentence: "Rizal wrote 'Education Gives Luster to the Motherland' at age [_____].", answer: "15", fact: "At just 15 years old, Rizal demonstrated his intellectual maturity by composing this profound poem about education and national progress." },
+      { sentence: "The poem was written while he was a student at [_____].", answer: "Ateneo", fact: "Ateneo Municipal was the premier educational institution in Manila during Rizal's time, where he received his secondary education." },
+      { sentence: "He compared education to a [_____] that guides a nation.", answer: "Lighthouse", fact: "The lighthouse metaphor in the poem symbolizes how education illuminates the path to national progress and enlightenment." },
+      { sentence: "Rizal believed education brings [_____] to the country.", answer: "Honor", fact: "Or 'Luster' – Rizal saw education as the key to national dignity and the restoration of Filipino pride." },
+      { sentence: "His final poem, hidden in a lamp, was [_____].", answer: "Mi Último Adiós", fact: "'Mi Último Adiós' (My Last Farewell) was written the night before his execution and smuggled out in an alcohol lamp." },
+      { sentence: "Rizal was executed on December [_____], 1896.", answer: "30", fact: "December 30, 1896, is now celebrated as Rizal Day in the Philippines, a national holiday honoring his memory and sacrifice." },
+      { sentence: "He was a polymath, meaning he excelled in [_____] fields.", answer: "Many", fact: "Rizal was a physician, writer, poet, artist, journalist, and scientist – a true Renaissance man of the 19th century." },
+      { sentence: "His novels sparked the [_____].", answer: "Philippine Revolution", fact: "Rizal's works, particularly 'Noli Me Tangere' and 'El Filibusterismo', inspired Filipinos to fight for independence from Spanish colonial rule." }
+    ];
+
+    // Game State
+    let currentGame = null;
+    let triviaIndex = 0;
+    let triviaScore = 0;
+    let triviaAnswered = false;
+    let blanksIndex = 0;
+    let blanksScore = 0;
+
+    // Functions
+    function startGame(game) {
+      currentGame = game;
+      document.getElementById('gameMenu').style.display = 'none';
+      
+      if (game === 'trivia') {
+        triviaIndex = 0;
+        triviaScore = 0;
+        triviaAnswered = false;
+        document.getElementById('triviaScreen').classList.add('active');
+        loadTrivia();
+      } else if (game === 'blanks') {
+        blanksIndex = 0;
+        blanksScore = 0;
+        document.getElementById('blanksScreen').classList.add('active');
+        loadBlanks();
+      }
+    }
+
+    function backToMenu() {
+      document.querySelectorAll('.game-screen').forEach(screen => screen.classList.remove('active'));
+      document.getElementById('gameMenu').style.display = 'grid';
+    }
+
+    // Trivia Functions
+    function loadTrivia() {
+      const data = triviaData[triviaIndex];
+      document.getElementById('triviaQuestion').textContent = data.question;
+      document.getElementById('triviaProgress').textContent = `Question ${triviaIndex + 1} of 10`;
+      document.getElementById('triviaScore').textContent = `Score: ${triviaScore}/10`;
+      document.getElementById('triviaProgressBar').style.width = ((triviaIndex + 1) * 10) + '%';
+      document.getElementById('triviaNextBtn').disabled = true;
+      triviaAnswered = false;
+      document.getElementById('historicalFact').classList.remove('show');
+
+      const optionsContainer = document.getElementById('triviaOptions');
+      optionsContainer.innerHTML = '';
+      data.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = option;
+        btn.onclick = () => selectTriviaOption(index);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectTriviaOption(index) {
+      if (triviaAnswered) return;
+      
+      const data = triviaData[triviaIndex];
+      const buttons = document.querySelectorAll('#triviaOptions .option-btn');
+      buttons.forEach(btn => btn.disabled = true);
+
+      triviaAnswered = true;
+      
+      if (index === data.correct) {
+        buttons[index].classList.add('correct');
+        triviaScore++;
+      } else {
+        buttons[index].classList.add('incorrect');
+        buttons[data.correct].classList.add('correct');
+      }
+
+      document.getElementById('triviaScore').textContent = `Score: ${triviaScore}/10`;
+      document.getElementById('historicalFact').classList.add('show');
+      document.getElementById('factText').textContent = data.fact;
+      document.getElementById('triviaNextBtn').disabled = false;
+    }
+
+    function nextTrivia() {
+      triviaIndex++;
+      if (triviaIndex < 10) {
+        loadTrivia();
+      } else {
+        showTriviaSummary();
+      }
+    }
+
+    function showTriviaSummary() {
+      document.getElementById('triviaScreen').style.display = 'none';
+      const summary = document.getElementById('triviaSummary');
+      summary.classList.add('show');
+      document.getElementById('finalTriviaScore').textContent = `${triviaScore}/10`;
+      
+      let message = '';
+      if (triviaScore === 10) message = "Perfect! You're a true Rizal expert! 🏆";
+      else if (triviaScore >= 8) message = "Excellent! You know Rizal very well! 🌟";
+      else if (triviaScore >= 6) message = "Great job! You have good knowledge of Rizal! ✨";
+      else if (triviaScore >= 4) message = "Not bad! Keep learning about Rizal! 📚";
+      else message = "Keep exploring Rizal's incredible life story! ";
+      
+      document.getElementById('triviaMessage').textContent = message;
+      document.getElementById('triviaScreen').style.display = 'block';
+    }
+
+    // Blanks Functions
+    function loadBlanks() {
+      const data = blanksData[blanksIndex];
+      document.getElementById('blanksQuestion').textContent = data.sentence;
+      document.getElementById('blanksProgress').textContent = `Question ${blanksIndex + 1} of 8`;
+      document.getElementById('blanksScore').textContent = `Score: ${blanksScore}/8`;
+      document.getElementById('blanksProgressBar').style.width = ((blanksIndex + 1) * 12.5) + '%';
+      document.getElementById('blanksInput').value = '';
+      document.getElementById('blanksInput').focus();
+      document.getElementById('blanksFact').classList.remove('show');
+    }
+
+    function nextBlanks() {
+      const input = document.getElementById('blanksInput').value.trim().toLowerCase();
+      const data = blanksData[blanksIndex];
+      
+      if (input === data.answer.toLowerCase()) {
+        blanksScore++;
+        document.getElementById('blanksFact').classList.add('show');
+        document.getElementById('blanksFactText').textContent = data.fact;
+      } else {
+        document.getElementById('blanksFact').classList.add('show');
+        document.getElementById('blanksFactText').textContent = `Correct answer: ${data.answer}. ${data.fact}`;
+      }
+      
+      document.getElementById('blanksScore').textContent = `Score: ${blanksScore}/8`;
+      
+      setTimeout(() => {
+        blanksIndex++;
+        if (blanksIndex < 8) {
+          loadBlanks();
+        } else {
+          showBlanksSummary();
+        }
+      }, 2000);
+    }
+
+    function showBlanksSummary() {
+      document.getElementById('blanksScreen').style.display = 'none';
+      const summary = document.getElementById('blanksSummary');
+      summary.classList.add('show');
+      document.getElementById('finalBlanksScore').textContent = `${blanksScore}/8`;
+      
+      let message = '';
+      if (blanksScore === 8) message = "Perfect! You filled every blank correctly! 🏆";
+      else if (blanksScore >= 6) message = "Excellent! Great attention to detail! ✨";
+      else if (blanksScore >= 4) message = "Good effort! You got most of them right! 📚";
+      else message = "Keep learning more about Rizal! ";
+      
+      document.getElementById('blanksMessage').textContent = message;
+      document.getElementById('blanksScreen').style.display = 'block';
+    }
+
+    // Add Enter key support for blanks
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('blanksInput')?.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') nextBlanks();
+      });
+    });
+  </script>
+</body>
+
+</html>
