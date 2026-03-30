@@ -62,10 +62,15 @@
        HERO SECTION
   ══════════════════════════════════════════ -->
   <section id="hero">
-    <video autoplay muted loop playsinline class="hero-video-bg">
-      <source src="hero-vi.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <iframe
+      class="hero-video-bg"
+      src="https://www.youtube.com/embed/qmnvlq6YYjA?autoplay=1&mute=1&loop=1&controls=0&playlist=qmnvlq6YYjA&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1"
+      allow="autoplay; encrypted-media"
+      frameborder="0"
+      aria-hidden="true"
+      tabindex="-1"
+      title="Background video">
+    </iframe>
     <div class="hero-bg-texture"></div>
 
     <div class="hero-content">
@@ -140,9 +145,9 @@
         </p>
         <button class="wax-seal-btn" data-link="https://www.britannica.com/place/Philippines/The-19th-century"
           data-title="19th Century Philippines"
-          data-desc="The 19th-century Philippines was defined by a rigid racial hierarchy and the combined authority of the Church and the military. It was within this environment of colonial tension that José Rizal was born in 1861, just as liberal ideas began to challenge Spain’s three-century rule."
+          data-desc="The 19th-century Philippines was defined by a rigid racial hierarchy and the combined authority of the Church and the military. It was within this environment of colonial tension that José Rizal was born in 1861, just as liberal ideas began to challenge Spain's three-century rule."
           data-gutenberg="https://www.britannica.com/place/Philippines/The-19th-century"
-          data-video="19thcentury.mp4">
+          data-video="https://drive.google.com/file/d/1yqR1sjweDZ9WJE2TBTyn6q-t-Hb1bBDZ/preview">
           <span class="seal-wax">🔴</span>
           <span class="seal-label">Open the Archive</span>
           <span class="seal-arrow">→</span>
@@ -506,18 +511,10 @@
         <span class="link-arrow">↗</span>
       </a>
       <a href="#" class="modal-video-link" id="modalVideoLink" target="_blank" rel="noopener" style="display:none;">
-        <span class="modal-video-icon"></span>
-        <span>Watch AI Video on External Site</span>
+        <span class="modal-video-icon">▶</span>
+        <span>Watch AI Video (Google Drive)</span>
         <span class="link-arrow">↗</span>
       </a>
-      <!-- Inline video player (hidden until toggled) -->
-      <div class="modal-video-wrap" id="modalVideoWrap" style="display:none;">
-        <video id="modalVideo" controls playsinline>
-          <source id="modalVideoSrc" src="" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <p class="modal-video-credit">Generated with NotebookLM · AI-powered overview</p>
-      </div>
       <p class="modal-footnote">Free to read · Public domain · No account required</p>
     </div>
   </div>

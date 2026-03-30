@@ -397,13 +397,19 @@ button {
 
 .hero-video-bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  /* Make iframe larger than viewport so YouTube's top/bottom bars are hidden off-screen */
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* Scale up to cover and push YouTube UI out of view */
+  min-width: 110%;
+  min-height: 110%;
+  transform: translate(-50%, -50%) scale(1.5);
   z-index: 1;
   pointer-events: none;
+  border: none;
+  opacity: 95;
 }
 
 .hero-bg-texture {
@@ -414,17 +420,6 @@ button {
     radial-gradient(circle at 85% 20%, rgba(0, 56, 168, 0.04) 0%, transparent 50%);
   pointer-events: none;
   z-index: 2;
-}
-
-.hero-content {
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  z-index: 3;
-  text-align: left;
-  max-width: 600px;
 }
 
 .hero-eyebrow {
@@ -477,14 +472,14 @@ button {
   color: var(--white);
   font-size: 1.1em;
   font-weight: 700;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .title-name {
   color: var(--gold);
   font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 900;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.75);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
 }
 
 .hero-subtitle {
@@ -524,7 +519,7 @@ button {
   background: rgba(255, 255, 255, 0.25);
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .btn-hero:hover {
@@ -576,7 +571,8 @@ button {
 .btn-ghost:hover {
   border-color: var(--gold);
   color: var(--gold);
-  background: rgba(212, 160, 23, 0.15); /* light gold tint */
+  background: rgba(212, 160, 23, 0.15);
+  /* light gold tint */
   transform: translateY(-1px);
   box-shadow: 0 6px 14px rgba(181, 133, 22, 0.25);
 }

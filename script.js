@@ -226,27 +226,17 @@
   const descEl       = document.getElementById('modalDesc');
   const linkEl       = document.getElementById('modalLink');
   const videoLinkEl  = document.getElementById('modalVideoLink');
-  const videoWrap    = document.getElementById('modalVideoWrap');
-  const videoEl      = document.getElementById('modalVideo');
-  const videoSrc     = document.getElementById('modalVideoSrc');
 
   function openModal(title, desc, href, videoPath) {
     titleEl.textContent = title;
     descEl.textContent  = desc;
     linkEl.href         = href;
 
-    // Reset video state
-    videoWrap.style.display = 'none';
-    videoEl.pause();
-    videoSrc.src = '';
-    videoEl.load();
-
-    // Show or hide external video link (no AI inline toggle button)
-    if (videoPath) {
-      videoSrc.src = videoPath;
+    // Show or hide the Watch Video button
+    if (videoPath && videoLinkEl) {
       videoLinkEl.href = videoPath;
       videoLinkEl.style.display = 'flex';
-    } else {
+    } else if (videoLinkEl) {
       videoLinkEl.style.display = 'none';
       videoLinkEl.href = '#';
     }
@@ -259,9 +249,6 @@
   function closeModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    // Stop video playback on close
-    videoEl.pause();
-    videoWrap.style.display = 'none';
   }
 
   // Bind all wax seal buttons
