@@ -437,6 +437,7 @@
     </iframe>
     <div class="games-bg-texture"></div>
     <div class="games-wrapper">
+
       <!-- Game Menu -->
       <div id="gameMenu" class="game-menu active-state">
         <div class="games-header" style="grid-column: 1 / -1;">
@@ -449,7 +450,6 @@
           <small>(10 Questions)</small>
         </button>
         <button class="game-btn" onclick="startGame('blanks')">
-         
           <span class="game-label">Fill in the Blanks</span>
           <small>(8 Sentences)</small>
         </button>
@@ -468,7 +468,7 @@
             <div class="progress-fill" id="triviaProgressBar" style="width: 10%"></div>
           </div>
         </div>
-        <div class="question-container">
+        <div class="question-container" id="triviaQuestionContainer">
           <div class="question-text" id="triviaQuestion"></div>
           <div class="answer-options" id="triviaOptions"></div>
           <div class="historical-fact" id="historicalFact">
@@ -476,7 +476,7 @@
             <div class="historical-fact-text" id="factText"></div>
           </div>
         </div>
-        <div class="button-group">
+        <div class="button-group" id="triviaButtonGroup">
           <button class="btn-back" onclick="backToMenu()">Back to Menu</button>
           <button class="btn-next" id="triviaNextBtn" onclick="nextTrivia()" disabled>Next →</button>
         </div>
@@ -500,15 +500,15 @@
             <div class="progress-fill" id="blanksProgressBar" style="width: 12.5%"></div>
           </div>
         </div>
-        <div class="question-container">
+        <div class="question-container" id="blanksQuestionContainer">
           <div class="question-text" id="blanksQuestion"></div>
           <input type="text" class="answer-input" id="blanksInput" placeholder="Type your answer and press Enter or click Next">
           <div class="historical-fact" id="blanksFact">
-            <div class="historical-fact-label">✓ Correct!</div>
+            <div class="historical-fact-label">✓ Answer</div>
             <div class="historical-fact-text" id="blanksFactText"></div>
           </div>
         </div>
-        <div class="button-group">
+        <div class="button-group" id="blanksButtonGroup">
           <button class="btn-back" onclick="backToMenu()">Back to Menu</button>
           <button class="btn-next" id="blanksNextBtn" onclick="nextBlanks()">Next →</button>
         </div>
@@ -519,11 +519,12 @@
           <button class="btn-next" onclick="backToMenu()">Play Again →</button>
         </div>
       </div>
+
     </div>
   </div>
 
   <script>
-    // Game Data
+    // ── Game Data ──────────────────────────────────────────────────
     const triviaData = [
       {
         question: "What was Rizal's first poem?",
@@ -598,39 +599,80 @@
       { sentence: "His novels sparked the [_____].", answer: "Philippine Revolution", fact: "Rizal's works, particularly 'Noli Me Tangere' and 'El Filibusterismo', inspired Filipinos to fight for independence from Spanish colonial rule." }
     ];
 
-    // Game State
+    // ── Game State ─────────────────────────────────────────────────
     let currentGame = null;
     let triviaIndex = 0;
     let triviaScore = 0;
     let triviaAnswered = false;
     let blanksIndex = 0;
     let blanksScore = 0;
+    let blanksTimeout = null;
 
-    // Functions
+    // ── Core Functions ─────────────────────────────────────────────
+
     function startGame(game) {
       currentGame = game;
       document.getElementById('gameMenu').style.display = 'none';
-      
+
       if (game === 'trivia') {
+        // Reset all state
         triviaIndex = 0;
         triviaScore = 0;
         triviaAnswered = false;
+        // Reset DOM
+        document.getElementById('triviaSummary').classList.remove('show');
+        document.getElementById('triviaQuestionContainer').style.display = '';
+        document.getElementById('triviaButtonGroup').style.display = '';
+        document.getElementById('triviaScreen').style.display = '';
+        // Activate screen and load
         document.getElementById('triviaScreen').classList.add('active');
         loadTrivia();
+
       } else if (game === 'blanks') {
+        // Reset all state
         blanksIndex = 0;
         blanksScore = 0;
+        if (blanksTimeout) clearTimeout(blanksTimeout);
+        // Reset DOM
+        document.getElementById('blanksSummary').classList.remove('show');
+        document.getElementById('blanksQuestionContainer').style.display = '';
+        document.getElementById('blanksButtonGroup').style.display = '';
+        document.getElementById('blanksScreen').style.display = '';
+        // Activate screen and load
         document.getElementById('blanksScreen').classList.add('active');
         loadBlanks();
       }
     }
 
     function backToMenu() {
-      document.querySelectorAll('.game-screen').forEach(screen => screen.classList.remove('active'));
+      // Clear any pending blanks timeout
+      if (blanksTimeout) {
+        clearTimeout(blanksTimeout);
+        blanksTimeout = null;
+      }
+
+      // Remove active class from all game screens
+      document.querySelectorAll('.game-screen').forEach(screen => {
+        screen.classList.remove('active');
+        screen.style.display = '';
+      });
+
+      // Hide summaries
+      document.getElementById('triviaSummary').classList.remove('show');
+      document.getElementById('blanksSummary').classList.remove('show');
+
+      // Restore question containers and button groups
+      document.getElementById('triviaQuestionContainer').style.display = '';
+      document.getElementById('triviaButtonGroup').style.display = '';
+      document.getElementById('blanksQuestionContainer').style.display = '';
+      document.getElementById('blanksButtonGroup').style.display = '';
+
+      // Show the main menu
       document.getElementById('gameMenu').style.display = 'grid';
     }
 
-    // Trivia Functions
+    // ── Trivia Functions ───────────────────────────────────────────
+
     function loadTrivia() {
       const data = triviaData[triviaIndex];
       document.getElementById('triviaQuestion').textContent = data.question;
@@ -654,13 +696,13 @@
 
     function selectTriviaOption(index) {
       if (triviaAnswered) return;
-      
+
       const data = triviaData[triviaIndex];
       const buttons = document.querySelectorAll('#triviaOptions .option-btn');
       buttons.forEach(btn => btn.disabled = true);
 
       triviaAnswered = true;
-      
+
       if (index === data.correct) {
         buttons[index].classList.add('correct');
         triviaScore++;
@@ -685,23 +727,27 @@
     }
 
     function showTriviaSummary() {
-      document.getElementById('triviaScreen').style.display = 'none';
+      // Hide question area and button group, keep screen visible
+      document.getElementById('triviaQuestionContainer').style.display = 'none';
+      document.getElementById('triviaButtonGroup').style.display = 'none';
+
+      // Show summary
       const summary = document.getElementById('triviaSummary');
       summary.classList.add('show');
       document.getElementById('finalTriviaScore').textContent = `${triviaScore}/10`;
-      
+
       let message = '';
       if (triviaScore === 10) message = "Perfect! You're a true Rizal expert! 🏆";
       else if (triviaScore >= 8) message = "Excellent! You know Rizal very well! 🌟";
       else if (triviaScore >= 6) message = "Great job! You have good knowledge of Rizal! ✨";
       else if (triviaScore >= 4) message = "Not bad! Keep learning about Rizal! 📚";
       else message = "Keep exploring Rizal's incredible life story! ";
-      
+
       document.getElementById('triviaMessage').textContent = message;
-      document.getElementById('triviaScreen').style.display = 'block';
     }
 
-    // Blanks Functions
+    // ── Blanks Functions ───────────────────────────────────────────
+
     function loadBlanks() {
       const data = blanksData[blanksIndex];
       document.getElementById('blanksQuestion').textContent = data.sentence;
@@ -709,6 +755,8 @@
       document.getElementById('blanksScore').textContent = `Score: ${blanksScore}/8`;
       document.getElementById('blanksProgressBar').style.width = ((blanksIndex + 1) * 12.5) + '%';
       document.getElementById('blanksInput').value = '';
+      document.getElementById('blanksInput').disabled = false;
+      document.getElementById('blanksNextBtn').disabled = false;
       document.getElementById('blanksInput').focus();
       document.getElementById('blanksFact').classList.remove('show');
     }
@@ -716,19 +764,25 @@
     function nextBlanks() {
       const input = document.getElementById('blanksInput').value.trim().toLowerCase();
       const data = blanksData[blanksIndex];
-      
+
+      // Disable input and button while waiting to advance
+      document.getElementById('blanksInput').disabled = true;
+      document.getElementById('blanksNextBtn').disabled = true;
+
       if (input === data.answer.toLowerCase()) {
         blanksScore++;
-        document.getElementById('blanksFact').classList.add('show');
+        document.getElementById('blanksFact').querySelector('.historical-fact-label').textContent = '✓ Correct!';
         document.getElementById('blanksFactText').textContent = data.fact;
       } else {
-        document.getElementById('blanksFact').classList.add('show');
+        document.getElementById('blanksFact').querySelector('.historical-fact-label').textContent = '✗ Not quite';
         document.getElementById('blanksFactText').textContent = `Correct answer: ${data.answer}. ${data.fact}`;
       }
-      
+
+      document.getElementById('blanksFact').classList.add('show');
       document.getElementById('blanksScore').textContent = `Score: ${blanksScore}/8`;
-      
-      setTimeout(() => {
+
+      blanksTimeout = setTimeout(() => {
+        blanksTimeout = null;
         blanksIndex++;
         if (blanksIndex < 8) {
           loadBlanks();
@@ -739,25 +793,30 @@
     }
 
     function showBlanksSummary() {
-      document.getElementById('blanksScreen').style.display = 'none';
+      // Hide question area and button group, keep screen visible
+      document.getElementById('blanksQuestionContainer').style.display = 'none';
+      document.getElementById('blanksButtonGroup').style.display = 'none';
+
+      // Show summary
       const summary = document.getElementById('blanksSummary');
       summary.classList.add('show');
       document.getElementById('finalBlanksScore').textContent = `${blanksScore}/8`;
-      
+
       let message = '';
       if (blanksScore === 8) message = "Perfect! You filled every blank correctly! 🏆";
       else if (blanksScore >= 6) message = "Excellent! Great attention to detail! ✨";
       else if (blanksScore >= 4) message = "Good effort! You got most of them right! 📚";
       else message = "Keep learning more about Rizal! ";
-      
+
       document.getElementById('blanksMessage').textContent = message;
-      document.getElementById('blanksScreen').style.display = 'block';
     }
 
-    // Add Enter key support for blanks
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('blanksInput')?.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') nextBlanks();
+    // ── Enter key support for blanks ───────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('blanksInput')?.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && !document.getElementById('blanksNextBtn').disabled) {
+          nextBlanks();
+        }
       });
     });
   </script>
