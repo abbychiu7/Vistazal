@@ -45,22 +45,22 @@
     }
 
     .back-to-games-btn {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 6px 12px;
-      background: var(--navy);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 0.8rem;
-      grid-column: 2;
-      grid-row: 3;
-      justify-self: end;
-    }
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 12px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  grid-column: 1 / -1;   /* ← spans full width on all screens */
+  grid-row: 4;            /* ← always last row, after both buttons */
+  justify-self: end;      /* ← right-aligned on desktop */
+}
 
     .back-to-games-btn:hover {
       background: var(--navy-dark);
@@ -384,28 +384,42 @@
       margin-bottom: 20px;
     }
 
-    @media (max-width: 768px) {
-      .games-wrapper {
-        padding: 24px;
-      }
+   @media (max-width: 768px) {
+  .games-wrapper {
+    padding: 24px;
+  }
 
-      .games-header h1 {
-        font-size: 1.8rem;
-      }
+  .games-header h1 {
+    font-size: 1.8rem;
+  }
 
-      .game-menu {
-        grid-template-columns: 1fr;
-      }
+  .game-menu {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
 
-      .button-group {
-        flex-direction: column;
-      }
+  .game-btn {
+    width: 100%;
+    min-height: 80px;
+  }
 
-      .btn-back,
-      .btn-next {
-        width: 100%;
-      }
-    }
+  .back-to-games-btn {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-self: stretch;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn-back,
+  .btn-next {
+    width: 100%;
+  }
+}
   </style>
 </head>
 
